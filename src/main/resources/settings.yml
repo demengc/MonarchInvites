@@ -1,0 +1,38 @@
+# Official settings file for MonarchInvites.
+
+# The prefix that will be displayed in front of almost every message.
+prefix: "&7[&6Invites&7] &r"
+
+# Storage options.
+storage:
+
+  # Credentials to your database.
+  host: "localhost"
+  port: 3306
+  database: "minecraft"
+  username: "root"
+  password: "root"
+
+  # Additional options that will be appended to the JDBC connection URL.
+  # Leave default if you do not know what this does!
+  additional-options: "?autoReconnect=true&useSSL=false"
+
+# If an internal error occurs while player tries to set their referrer.
+internal-error: "&eSorry, you cannot set your referrer at this time. Please try again later."
+
+# If the referrrer is invalid or has never joined the server before.
+invalid-referrer: "&f%player% &eis not a valid player."
+
+# If a player tries to set their referrer but their IP has already been referred.
+already-referred: "&eYou have already set &f%player% &eas your referrer."
+
+# If a player tries to do /refer on themselves.
+refer-self: "&eYou cannot set your referrer as yourself."
+
+# If the refer command is successful.
+referrer-set: "&eYou have set &f%player% &eas your referrer!"
+
+# Common self-explanatory errors that can happen during a command execution.
+not-player: "&eYou must be in-game to run that command."
+invalid-args: "&eIncorrect usage. Did you mean: &f%usage%"
+no-permission: "&eYou need the &f%permission% &epermission to do that."

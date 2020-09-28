@@ -1,0 +1,7 @@
+name: MonarchInvites
+version: ${project.version}
+main: dev.demeng.monarchinvites.MonarchInvites
+api-version: 1.16
+authors: [ Demeng ]
+description: Plugin for tracking referrals.
+website: https://demeng.dev/
