@@ -41,3 +41,6 @@ referrer-set: "&eYou have set &f%player% &eas your referrer!"
 not-player: "&eYou must be in-game to run that command."
 invalid-args: "&eIncorrect usage. Did you mean: &f%usage%"
 no-permission: "&eYou need the &f%permission% &epermission to do that."
+
+# Sent after config reload is successful.
+reloaded: "&eConfig has been reloaded."

@@ -5,6 +5,7 @@ import dev.demeng.demlib.command.CommandMessages;
 import dev.demeng.demlib.core.DemLib;
 import dev.demeng.demlib.file.YamlFile;
 import dev.demeng.demlib.message.MessageUtils;
+import dev.demeng.monarchinvites.commands.MonarchInvitesCmd;
 import dev.demeng.monarchinvites.commands.ReferCmd;
 import dev.demeng.monarchinvites.data.InvitesDatabase;
 import dev.demeng.monarchinvites.listener.RewardsQueueListener;
@@ -52,6 +53,7 @@ public final class MonarchInvites extends JavaPlugin {
 
     getLogger().info("Registering commands...");
     try {
+      Registerer.registerCommand(new MonarchInvitesCmd(this));
       Registerer.registerCommand(new ReferCmd(this));
     } catch (NoSuchFieldException | IllegalAccessException ex) {
       MessageUtils.error(ex, "Failed to register commands.", true);
