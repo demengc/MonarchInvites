@@ -17,6 +17,11 @@ storage:
   # Leave default if you do not know what this does!
   additional-options: "?autoReconnect=true&useSSL=false"
 
+# Commands executed when a player refers another player.
+# Use %player% for the referrer's name. These commands are executed via console.
+reward-commands:
+  - "broadcast %player% has just referred another player!"
+
 # If an internal error occurs while player tries to set their referrer.
 internal-error: "&eSorry, you cannot set your referrer at this time. Please try again later."
 
