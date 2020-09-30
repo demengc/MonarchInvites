@@ -25,12 +25,17 @@ public class InvitesDatabase extends MySQL {
     executeUpdate(
         "CREATE TABLE IF NOT EXISTS monarchinvites_invites "
             + "(uuid VARCHAR(255), ips TEXT, PRIMARY KEY(uuid));");
+
+    executeUpdate(
+        "CREATE TABLE IF NOT EXISTS monarchinvites_queue "
+            + "(uuid VARCHAR(255), rewards INTEGER, PRIMARY KEY(uuid));");
   }
 
   public UUID getReferrer(String referredIp) throws SQLException {
 
     final ResultSet rs =
-        executeQuery("SELECT uuid FROM monarchinvites_invites WHERE ips LIKE \"%"+ referredIp + "%\";");
+        executeQuery(
+            "SELECT uuid FROM monarchinvites_invites WHERE ips LIKE \"%" + referredIp + "%\";");
 
     if (rs.next()) {
       return UUID.fromString(rs.getString("uuid"));
@@ -60,6 +65,28 @@ public class InvitesDatabase extends MySQL {
           ListSerializer.serialize(ips),
           referrer.toString());
     }
+  }
+
+  public int getRewards(UUID uuid) throws SQLException {
+    final ResultSet rs =
+        executeQuery("SELECT rewards FROM monarchinvites_queue WHERE uuid = ?;", uuid.toString());
+
+    if (!rs.next()) {
+      return 0;
+    }
+
+    return rs.getInt(1);
+  }
+
+  public void addReward(UUID uuid) throws SQLException {
+    executeUpdate(
+        "INSERT INTO monarchinvites_queue VALUES(?, ?) ON DUPLICATE KEY UPDATE rewards = rewards + 1;",
+        uuid.toString(),
+        1);
+  }
+
+  public void removeRewards(UUID uuid) throws SQLException {
+    executeUpdate("DELETE FROM monarchinvites_queue WHERE uuid = ?", uuid.toString());
   }
 
   public void close() throws SQLException {
