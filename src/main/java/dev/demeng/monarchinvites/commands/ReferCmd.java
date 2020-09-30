@@ -85,8 +85,8 @@ public class ReferCmd extends CustomCommand {
                     .replace("%player%", args[0]));
 
             if (referrer.isOnline()) {
-                sendRewards(p);
-                return;
+              sendRewards(p);
+              return;
             }
 
             i.getDatabase().addReward(uuid);
@@ -106,7 +106,8 @@ public class ReferCmd extends CustomCommand {
     if (!Bukkit.isPrimaryThread()) {
       Common.run(
           () -> {
-            for (String cmd : i.getSettings().getStringList("reward-commands")) {
+            for (String cmd :
+                MonarchInvites.getInstance().getSettings().getStringList("reward-commands")) {
               Bukkit.dispatchCommand(
                   Bukkit.getConsoleSender(), cmd.replace("%player%", player.getName()));
             }

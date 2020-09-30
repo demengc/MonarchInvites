@@ -16,12 +16,16 @@ import java.sql.SQLException;
 
 public final class MonarchInvites extends JavaPlugin {
 
+  @Getter private static MonarchInvites instance;
+
   @Getter private YamlFile settingsFile;
 
   @Getter private InvitesDatabase database;
 
   @Override
   public void onEnable() {
+
+    instance = this;
 
     DemLib.setPlugin(this);
     DemLib.setPrefix("&7[&6Invites&7] &r");
