@@ -7,6 +7,7 @@ import dev.demeng.demlib.file.YamlFile;
 import dev.demeng.demlib.message.MessageUtils;
 import dev.demeng.monarchinvites.commands.ReferCmd;
 import dev.demeng.monarchinvites.data.InvitesDatabase;
+import dev.demeng.monarchinvites.listener.RewardsQueueListener;
 import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -52,6 +53,9 @@ public final class MonarchInvites extends JavaPlugin {
       MessageUtils.error(ex, "Failed to register commands.", true);
       return;
     }
+
+    getLogger().info("Registering listeners...");
+    Registerer.registerListener(new RewardsQueueListener(this));
 
     MessageUtils.console("&aMonarchInvites has been successfully enabled.");
   }

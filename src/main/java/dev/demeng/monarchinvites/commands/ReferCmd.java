@@ -48,7 +48,7 @@ public class ReferCmd extends CustomCommand {
 
     Common.run(
         () -> {
-          String ip = null;
+          String ip;
 
           try {
             ip = Objects.requireNonNull(p.getAddress()).getAddress().getHostAddress();
@@ -84,11 +84,34 @@ public class ReferCmd extends CustomCommand {
                 Objects.requireNonNull(i.getSettings().getString("referrer-set"))
                     .replace("%player%", args[0]));
 
+            if (referrer.isOnline()) {
+                sendRewards(p);
+                return;
+            }
+
+            i.getDatabase().addReward(uuid);
+
           } catch (SQLException ex) {
             MessageUtils.error(ex, "Failed to check referral and add invite.", false);
             MessageUtils.tell(sender, i.getSettings().getString("internal-error"));
           }
         },
         true);
+  }
+
+  public static void sendRewards(OfflinePlayer player) {
+
+    Objects.requireNonNull(player.getName());
+
+    if (!Bukkit.isPrimaryThread()) {
+      Common.run(
+          () -> {
+            for (String cmd : i.getSettings().getStringList("reward-commands")) {
+              Bukkit.dispatchCommand(
+                  Bukkit.getConsoleSender(), cmd.replace("%player%", player.getName()));
+            }
+          },
+          false);
+    }
   }
 }
